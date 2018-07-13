@@ -11,7 +11,6 @@ using Xunit.Sdk;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 public sealed class ExcelDataAttribute : DataAttribute
 {
-
     public ExcelDataAttribute(string fileName)
     {
         FileName = fileName;
@@ -21,10 +20,9 @@ public sealed class ExcelDataAttribute : DataAttribute
 
     public override IEnumerable<object[]> GetData(MethodInfo testMethod)
     {
-        //
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         if (testMethod == null)
-            throw new ArgumentNullException("testMethod");
+            throw new ArgumentNullException("testMethod is null");
 
         ParameterInfo[] pars = testMethod.GetParameters();
         return DataSource(FileName, pars.Select(par => par.ParameterType).ToArray());
@@ -41,12 +39,6 @@ public sealed class ExcelDataAttribute : DataAttribute
                     yield return ConvertParameters(row.ItemArray, parameterTypes);
             }
         }
-    }
-
-    private static string GetFullFilename(string filename)
-    {
-        string executable = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
-        return Path.GetFullPath(Path.Combine(Path.GetDirectoryName(executable), filename));
     }
 
     private static object[] ConvertParameters(object[] values, Type[] parameterTypes)

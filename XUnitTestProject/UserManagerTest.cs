@@ -5,8 +5,18 @@ using System;
 
 namespace XUnitTestProject
 {
-    public class UserManagerTest
+    [Collection("Database collection")]
+    public class UserManagerTest //: IClassFixture<DatabaseFixture>
     {
+        /*public UserManagerTest()
+        {
+            using (var dbContext = new UserDbContext())
+            {
+                dbContext.Database.EnsureDeleted();
+                dbContext.Database.EnsureCreated();
+            }
+        }*/
+
         [Fact]
         public void CreateUserWithExceptionTest()
         {
@@ -27,6 +37,21 @@ namespace XUnitTestProject
             var userManager = new UserManager(mockObject.Object);
             var result = userManager.CreateNewUser(user);
             Assert.True(result);
+        }
+
+        [Fact]
+        public void CreateUserWithDBTest()
+        {
+            var repository = new SqlServerUserRepository();
+            var user = new User() { Name = "selim", Age = 1 };
+            var userManager = new UserManager(repository);
+            var result = userManager.CreateNewUser(user);
+            Assert.True(result);
+            var u = userManager.GetUserByName("selim");
+            Assert.Equal(user.Name, u.Name);
+            Assert.Equal(user.Age, u.Age);
+            var count = userManager.GetAllUserCount();
+            Assert.Equal(3, count);
         }
     }
 }

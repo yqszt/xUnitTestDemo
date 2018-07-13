@@ -6,6 +6,7 @@ namespace UnitTestDemo
 {
     public class User
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
     }
@@ -13,6 +14,8 @@ namespace UnitTestDemo
     public interface IUserRepository
     {
         bool Add(User user);
+        int Count();
+        User GetByName(string name);
     }
 
     public class UserManager
@@ -34,6 +37,16 @@ namespace UnitTestDemo
             {
                return this.userRepository.Add(user);
             }
+        }
+
+        public User GetUserByName(string name)
+        {
+            return this.userRepository.GetByName(name);
+        }
+
+        public int GetAllUserCount()
+        {
+            return this.userRepository.Count();
         }
     }
 }

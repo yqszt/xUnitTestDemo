@@ -11,6 +11,11 @@ namespace UnitTestDemo
         {
             var cal = new Calculator();
             var result = cal.Addition(1, 2);
+            var repository = new SqlServerUserRepository();
+            var user = new User() { Name = "selim", Age = 1 };
+            var userManager = new UserManager(repository);
+            userManager.CreateNewUser(user);
+            var u = userManager.GetUserByName("selim");
         }
     }
 }
