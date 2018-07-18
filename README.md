@@ -1,5 +1,5 @@
 # xUnitTestDemo
-https://travis-ci.org/yqszt/xUnitTestDemo.svg?branch=master
+Travis:   [![Travis](https://travis-ci.org/yqszt/xUnitTestDemo.svg?branch=master)](https://travis-ci.org/yqszt/xUnitTestDemo)
 
 This is a demo that using xUnit.net for .net core unit testing, and it's support excel data driven test.
 
