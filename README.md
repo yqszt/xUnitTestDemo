@@ -1,4 +1,6 @@
 # xUnitTestDemo
+https://travis-ci.org/yqszt/xUnitTestDemo.svg?branch=master
+
 This is a demo that using xUnit.net for .net core unit testing, and it's support excel data driven test.
 
 this demo base on :
