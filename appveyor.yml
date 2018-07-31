@@ -2,13 +2,17 @@ version: 1.0.{build}
 image: Visual Studio 2017
 before_build:
 - cmd: dotnet restore
+- choco install opencover.portable
+- choco install codecov
 build:
   verbosity: minimal
-configuration: Release
+configuration:
+  - Debug
+  - Release
 artifacts:
  - path: UnitTestDemo\bin\$(configuration)
    name: Demo
    type: zip
-deploy:
- provider: GitHub
- artifact: Demo
+test_script:
+ - OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test" -output:coverage.xml -register:user -filter:"+[*]* -[*Moq]* -[xunit*]*" -oldstyle
+ - codecov -f "coverage.xml"
