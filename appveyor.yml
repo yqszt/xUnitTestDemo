@@ -16,3 +16,4 @@ artifacts:
 test_script:
  - OpenCover.Console.exe -target:"dotnet.exe" -targetargs:"test" -output:coverage.xml -register:user -filter:"+[*]* -[*Moq]* -[xunit*]*" -oldstyle
  - codecov -f "coverage.xml"
+
