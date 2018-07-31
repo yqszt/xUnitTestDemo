@@ -9,6 +9,3 @@ artifacts:
  - path: UnitTestDemo\bin\$(configuration)
    name: Demo
    type: zip
-deploy:
- provider: GitHub
- artifact: Demo
