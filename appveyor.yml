@@ -4,6 +4,7 @@ before_build:
 - cmd: dotnet restore
 build:
   verbosity: minimal
+configuration: Release
 artifacts:
  - path: UnitTestDemo\bin\$(configuration)
    name: Demo
